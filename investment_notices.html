@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Investment Notices</title>
+  <meta name='robots' content='noindex, nofollow'>
+  <script>
+    function checkPassword() {
+      var password = prompt("Please enter the password:", "");
+      var today = new Date();
+      var yyyy = today.getFullYear();
+      var mm = String(today.getMonth() + 1).padStart(2, '0');
+      var dd = String(today.getDate()).padStart(2, '0');
+      var correctPassword = yyyy + '-' + mm + '-' + dd;
+      if (password !== correctPassword) {
+        alert("Incorrect password.");
+        window.location.href = "about:blank";
+      }
+    }
+    checkPassword();
+  </script>
+</head>
+<body>
+  <h1>Investment Notices</h1>
+  <div id="content">
+    <!-- The content from crawling_InvestmentNotices/main.py will be inserted here -->
+  </div>
+</body>
+</html>
