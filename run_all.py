@@ -18,8 +18,8 @@ from pathlib import Path
 from datetime import datetime
 
 SCRIPT_DIR = Path(__file__).parent.parent
-WORK_NOTICES_DIR = SCRIPT_DIR / "crawling_WorkNotices"
-INVESTMENT_DIR = SCRIPT_DIR / "crawling_InvestmentNotice"
+WORK_NOTICES_DIR = SCRIPT_DIR / "crawling_worknotices"
+INVESTMENT_DIR = SCRIPT_DIR / "crawling_investmentnotices"
 WEBSITE_DIR = SCRIPT_DIR / "polaris-website"
 
 
