@@ -1,28 +1,257 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
-  <title>Investment Notices</title>
-  <meta name='robots' content='noindex, nofollow'>
-  <script>
-    function checkPassword() {
-      var password = prompt("Please enter the password:", "");
-      var today = new Date();
-      var yyyy = today.getFullYear();
-      var mm = String(today.getMonth() + 1).padStart(2, '0');
-      var dd = String(today.getDate()).padStart(2, '0');
-      var correctPassword = yyyy + '-' + mm + '-' + dd;
-      if (password !== correctPassword) {
-        alert("Incorrect password.");
-        window.location.href = "about:blank";
-      }
-    }
-    checkPassword();
-  </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>출자공고 모음 - 폴라리스아시아</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f7fa;
+        }
+        header {
+            text-align: center;
+            padding: 40px 0;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+        h1 { margin: 0; font-size: 2rem; }
+        .subtitle { opacity: 0.9; margin-top: 10px; }
+        .update-time { font-size: 0.9rem; opacity: 0.8; margin-top: 15px; }
+        
+        .nav { text-align: center; margin-bottom: 30px; }
+        .nav a {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 5px;
+            background: #fff;
+            border: 2px solid #2a5298;
+            color: #2a5298;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s;
+        }
+        .nav a:hover, .nav a.active {
+            background: #2a5298;
+            color: white;
+        }
+        
+        .summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        .summary-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        .summary-card .number { font-size: 2rem; font-weight: bold; color: #2a5298; }
+        .summary-card .label { color: #666; font-size: 0.9rem; }
+        
+        .source-section {
+            background: white;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        .source-title {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #eee;
+        }
+        .source-title h2 { margin: 0; color: #1e3c72; font-size: 1.3rem; }
+        .count-badge {
+            background: #2a5298;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            margin-left: 10px;
+        }
+        
+        .notice-item {
+            padding: 18px;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background 0.2s;
+        }
+        .notice-item:hover { background: #f8f9fa; }
+        .notice-item:last-child { border-bottom: none; }
+        
+        .notice-title {
+            font-weight: 600;
+            font-size: 1.05rem;
+            color: #1e3c72;
+            text-decoration: none;
+            line-height: 1.4;
+            display: block;
+        }
+        .notice-title:hover { color: #2a5298; }
+        .notice-meta {
+            display: flex;
+            gap: 20px;
+            margin-top: 10px;
+            font-size: 0.85rem;
+            color: #666;
+        }
+        .deadline { color: #c0392b; font-weight: 500; }
+        
+        .no-notices {
+            text-align: center;
+            padding: 60px 20px;
+            color: #888;
+            background: white;
+            border-radius: 12px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            font-size: 0.9rem;
+            color: #888;
+        }
+        footer a { color: #2a5298; text-decoration: none; }
+        
+        @media (max-width: 768px) {
+            body { padding: 10px; }
+            header { padding: 25px; }
+            h1 { font-size: 1.5rem; }
+            .summary { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
 </head>
 <body>
-  <h1>Investment Notices</h1>
-  <div id="content">
-    <!-- The content from crawling_InvestmentNotices/main.py will be inserted here -->
-  </div>
+
+    <header>
+        <h1>💰 출자공고 모음</h1>
+        <div class="subtitle">벤처캐피탈 · 공제회 · LP 출자사업</div>
+        <div class="update-time">마지막 업데이트: 2026-02-15 22:52</div>
+    </header>
+    
+    <nav class="nav">
+        <a href="index.html">🏠 홈</a>
+        <a href="work_notices.html">📋 정부사업</a>
+        <a href="investment_notices.html" class="active">💰 출자공고</a>
+    </nav>
+    
+    <div class="summary">
+        <div class="summary-card">
+            <div class="number">9</div>
+            <div class="label">총 공고 수</div>
+        </div>
+        <div class="summary-card">
+            <div class="number">4</div>
+            <div class="label">출자기관 수</div>
+        </div>
+    </div>
+
+    <section class="source-section">
+        <div class="source-title">
+            <h2>🏢 공무원연금공단</h2>
+            <span class="count-badge">1건</span>
+        </div>
+
+        <div class="notice-item">
+            <a href="https://www.geps.or.kr/notiCommunication_notice_center/40662?curPage=1" target="_blank" class="notice-title">2026년 해외주식 신규 위탁운용사 선정 공고</a>
+            <div class="notice-meta">
+                <span>📅 게시: 2026-02-12</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="source-section">
+        <div class="source-title">
+            <h2>🏢 한국벤처캐피탈협회</h2>
+            <span class="count-badge">3건</span>
+        </div>
+
+        <div class="notice-item">
+            <a href="https://www.kvca.or.kr/listbody.html?a_gb=board&a_cd=8&a_item=0&sm=2_2_2&keyfield=&key=&page=1&po_no=717" target="_blank" class="notice-title">[440] 한국벤처투자</a>
+            <div class="notice-meta">
+            </div>
+        </div>
+
+        <div class="notice-item">
+            <a href="https://www.kvca.or.kr/listbody.html?a_gb=board&a_cd=8&a_item=0&sm=2_2_2&keyfield=&key=&page=1&po_no=718" target="_blank" class="notice-title">[441] 한국벤처투자</a>
+            <div class="notice-meta">
+            </div>
+        </div>
+
+        <div class="notice-item">
+            <a href="https://www.kvca.or.kr/listbody.html?a_gb=board&a_cd=8&a_item=0&sm=2_2_2&keyfield=&key=&page=1&po_no=759" target="_blank" class="notice-title">[447] 에너지인프라자산운용</a>
+            <div class="notice-meta">
+            </div>
+        </div>
+    </section>
+
+    <section class="source-section">
+        <div class="source-title">
+            <h2>🏢 한국벤처투자</h2>
+            <span class="count-badge">2건</span>
+        </div>
+
+        <div class="notice-item">
+            <a href="javascript:board_view(4700);" target="_blank" class="notice-title">모태펀드(문화, 영화, 해양) 2026년 1차 정시 출자사업 계획 변경 공고</a>
+            <div class="notice-meta">
+                <span>📅 게시: 2026-02-09</span>
+            </div>
+        </div>
+
+        <div class="notice-item">
+            <a href="javascript:board_view(4703);" target="_blank" class="notice-title">모태펀드(중기부 소관) 2026년 1차 정시 창업초기(소형) 분야 주목적 투자 대상 안내</a>
+            <div class="notice-meta">
+                <span>📅 게시: 2026-02-09</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="source-section">
+        <div class="source-title">
+            <h2>🏢 한국성장금융</h2>
+            <span class="count-badge">3건</span>
+        </div>
+
+        <div class="notice-item">
+            <a href="https://www.kgrowth.or.kr/notice_view.asp?page=1&search_colume=&search_text=&idx=993&str_type=1&tab=1" target="_blank" class="notice-title">【선정공고】「K-방산수출펀드(1차)」 위탁운용사 선정계획 공고</a>
+            <div class="notice-meta">
+                <span>📅 게시: 2026-01-05</span>
+            </div>
+        </div>
+
+        <div class="notice-item">
+            <a href="https://www.kgrowth.or.kr/notice_view.asp?page=1&search_colume=&search_text=&idx=997&str_type=1&tab=1" target="_blank" class="notice-title">【선정공고】「IBK 성장 M&A펀드(3차)」 위탁운용사 선정계획 공고</a>
+            <div class="notice-meta">
+                <span>📅 게시: 2026-02-02</span>
+            </div>
+        </div>
+
+        <div class="notice-item">
+            <a href="https://www.kgrowth.or.kr/notice_view.asp?page=1&search_colume=&search_text=&idx=1000&str_type=1&tab=1" target="_blank" class="notice-title">【선정공고】「K-콘텐츠 미디어 전략펀드」프로젝트펀드(1차, 2차) 위탁운용사 선정계획 공고</a>
+            <div class="notice-meta">
+                <span>📅 게시: 2026-02-05</span>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <a href="index.html">← 홈으로 돌아가기</a><br><br>
+        &copy; Polaris Asia Company. All Rights Reserved.
+    </footer>
+
 </body>
 </html>
