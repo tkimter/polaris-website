@@ -86,6 +86,40 @@ def git_push_website():
         return False
 
 
+def git_pull_repos():
+    """모든 레포지토리 최신 코드 pull"""
+    repos = [
+        ("crawling_worknotices", WORK_NOTICES_DIR),
+        ("crawling_investmentnotices", INVESTMENT_DIR),
+        ("polaris-website", WEBSITE_DIR),
+    ]
+    
+    for name, repo_dir in repos:
+        if not repo_dir.exists():
+            print(f"[WARN] {name} 디렉토리 없음: {repo_dir}")
+            continue
+        try:
+            result = subprocess.run(
+                ["git", "pull", "--ff-only"],
+                cwd=str(repo_dir),
+                capture_output=True,
+                text=True,
+                timeout=60,
+            )
+            if result.returncode == 0:
+                output = result.stdout.strip()
+                if "Already up to date" in output:
+                    print(f"  [{name}] 이미 최신")
+                else:
+                    print(f"  [{name}] 업데이트 완료")
+            else:
+                print(f"  [{name}] pull 실패: {result.stderr.strip()}")
+        except subprocess.TimeoutExpired:
+            print(f"  [{name}] pull 시간 초과")
+        except Exception as e:
+            print(f"  [{name}] pull 오류: {e}")
+
+
 def main():
     parser = argparse.ArgumentParser(description="통합 크롤링 + GitHub Pages 업데이트")
     parser.add_argument("--no-push", action="store_true", help="Git push 안함")
@@ -97,6 +131,12 @@ def main():
         extra_args.append("--export-only")
     
     success = True
+    
+    # 0. 최신 코드 pull
+    print("\n" + "=" * 60)
+    print("🔄 코드 업데이트 (git pull)")
+    print("=" * 60)
+    git_pull_repos()
     
     # 1. 정부사업 공지 크롤링 + HTML 생성
     print("\n" + "=" * 60)
