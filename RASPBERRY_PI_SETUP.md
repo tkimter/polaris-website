@@ -41,8 +41,7 @@ Windows PC에서 [Raspberry Pi Imager](https://www.raspberrypi.com/software/) �
 ### 2-2. OS 이미지 굽기
 
 1. Raspberry Pi Imager 실행
-2. **OS 선택**: `Raspberry Pi OS (other)` → `Raspberry Pi OS Lite (64-bit)`
-   - Lite 버전 = 데스크톱 없음 → 메모리 절약
+2. **OS 선택**: `Raspberry Pi OS (other)` → `Raspberry Pi OS (64-bit)`
 3. **저장소 선택**: microSD 카드 선택
 4. **⚙️ 설정 (톱니바퀴 아이콘)** ← 이게 중요!
    - ✅ **Set hostname**: `polarispi` (또는 원하는 이름)
