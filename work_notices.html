@@ -12,7 +12,7 @@
         var yyyy = today.getFullYear();
         var mm = String(today.getMonth() + 1).padStart(2, '0');
         var dd = String(today.getDate()).padStart(2, '0');
-        var correctPassword = yyyy + '-' + mm + '-' + dd;
+        var correctPassword = '' + yyyy + mm + dd;
         if (password !== correctPassword) {
             alert("Incorrect password.");
             window.location.href = "about:blank";
