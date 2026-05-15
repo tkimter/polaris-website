@@ -11,6 +11,12 @@
             alert("Incorrect password.");
             window.location.href = "about:blank";
         }
+        async function sha256Hex(value) {
+            var encoder = new TextEncoder();
+            var hashBuffer = await crypto.subtle.digest('SHA-256', encoder.encode(value));
+            var hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(function(byte) { return byte.toString(16).padStart(2, '0'); }).join('');
+        }
         async function checkPassword() {
             try {
                 if (!window.crypto || !crypto.subtle) {
@@ -18,11 +24,13 @@
                     return;
                 }
                 var password = prompt("내부 직원용 페이지입니다. 비밀번호를 입력해주세요:", "");
-                var encoder = new TextEncoder();
-                var hashBuffer = await crypto.subtle.digest('SHA-256', encoder.encode(password || ''));
-                var hashArray = Array.from(new Uint8Array(hashBuffer));
-                var passwordHash = hashArray.map(function(byte) { return byte.toString(16).padStart(2, '0'); }).join('');
-                var correctHash = 'cc0993cb09acb7cfffde863f748567afb13aa44b109f517a9584a966c2b62cc2';
+                var today = new Date();
+                var yyyy = today.getFullYear();
+                var mm = String(today.getMonth() + 1).padStart(2, '0');
+                var dd = String(today.getDate()).padStart(2, '0');
+                var correctPassword = '' + yyyy + mm + dd;
+                var passwordHash = await sha256Hex(password || '');
+                var correctHash = await sha256Hex(correctPassword);
                 if (passwordHash !== correctHash) {
                     denyAccess();
                     return;
@@ -178,7 +186,7 @@
     <header>
         <h1>💰 출자공고 모음</h1>
         <div class="subtitle">벤처캐피탈 · 공제회 · LP 출자사업</div>
-        <div class="update-time">마지막 업데이트: 2026-05-15 08:39</div>
+        <div class="update-time">마지막 업데이트: 2026-05-15 10:31</div>
     </header>
     
     <nav class="nav">
@@ -189,7 +197,7 @@
     
     <div class="summary">
         <div class="summary-card">
-            <div class="number">27</div>
+            <div class="number">29</div>
             <div class="label">총 공고 수</div>
         </div>
         <div class="summary-card">
@@ -201,7 +209,7 @@
     <section class="table-section">
         <div class="section-title">
             <h2>🗓️ 공고일 역순</h2>
-            <span class="count-badge">27건</span>
+            <span class="count-badge">29건</span>
         </div>
         <div class="notices-table-wrap">
             <table class="notices-table">
@@ -214,6 +222,20 @@
                     </tr>
                 </thead>
                 <tbody>
+
+                    <tr>
+                        <td class="org-col">한국벤처캐피탈협회</td>
+                        <td class="title-col"><a href="https://www.kvca.or.kr/Program/invest/listbody.html?a_gb=board&amp;a_cd=8&amp;a_item=0&amp;sm=2_2_2&amp;keyfield=&amp;key=&amp;page=1&amp;po_no=811" target="_blank" rel="noopener noreferrer" class="notice-title">모태펀드(보건복지부) 2026년 5월 수시 출자사업 계획 공고</a></td>
+                        <td class="date-col">2026-05-11</td>
+                        <td class="deadline-col">2026-06-05</td>
+                    </tr>
+
+                    <tr>
+                        <td class="org-col">한국벤처캐피탈협회</td>
+                        <td class="title-col"><a href="https://www.kvca.or.kr/Program/invest/listbody.html?a_gb=board&amp;a_cd=8&amp;a_item=0&amp;sm=2_2_2&amp;keyfield=&amp;key=&amp;page=1&amp;po_no=812" target="_blank" rel="noopener noreferrer" class="notice-title">「K-방산수출펀드」 2차년도 위탁운용사 선정계획 공고</a></td>
+                        <td class="date-col">2026-05-13</td>
+                        <td class="deadline-col">2026-06-05</td>
+                    </tr>
 
                     <tr>
                         <td class="org-col">한국벤처캐피탈협회</td>

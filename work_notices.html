@@ -11,6 +11,12 @@
             alert("Incorrect password.");
             window.location.href = "about:blank";
         }
+        async function sha256Hex(value) {
+            var encoder = new TextEncoder();
+            var hashBuffer = await crypto.subtle.digest('SHA-256', encoder.encode(value));
+            var hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(function(byte) { return byte.toString(16).padStart(2, '0'); }).join('');
+        }
         async function checkPassword() {
             try {
                 if (!window.crypto || !crypto.subtle) {
@@ -18,11 +24,13 @@
                     return;
                 }
                 var password = prompt("내부 직원용 페이지입니다. 비밀번호를 입력해주세요:", "");
-                var encoder = new TextEncoder();
-                var hashBuffer = await crypto.subtle.digest('SHA-256', encoder.encode(password || ''));
-                var hashArray = Array.from(new Uint8Array(hashBuffer));
-                var passwordHash = hashArray.map(function(byte) { return byte.toString(16).padStart(2, '0'); }).join('');
-                var correctHash = 'cc0993cb09acb7cfffde863f748567afb13aa44b109f517a9584a966c2b62cc2';
+                var today = new Date();
+                var yyyy = today.getFullYear();
+                var mm = String(today.getMonth() + 1).padStart(2, '0');
+                var dd = String(today.getDate()).padStart(2, '0');
+                var correctPassword = '' + yyyy + mm + dd;
+                var passwordHash = await sha256Hex(password || '');
+                var correctHash = await sha256Hex(correctPassword);
                 if (passwordHash !== correctHash) {
                     denyAccess();
                     return;
@@ -152,7 +160,7 @@
     <header>
         <h1>🏛️ 정부사업 공고 모음</h1>
         <div class="subtitle">지원사업 · R&D 과제 · SW 용역/입찰</div>
-        <div class="update-time">마지막 업데이트: 2026-05-15 08:35</div>
+        <div class="update-time">마지막 업데이트: 2026-05-15 10:28</div>
     </header>
     
     <nav class="nav">
@@ -164,7 +172,7 @@
     <section class="table-section" id="date-ordered">
         <div class="section-title">
             <h2>🗓️ 공고일 역순</h2>
-            <span class="count-badge">934건</span>
+            <span class="count-badge">939건</span>
         </div>
         <div class="notices-table-wrap">
             <table class="notices-table">
@@ -179,7 +187,77 @@
                 <tbody>
 
                     <tr>
+                        <td class="org-col">중소기업은행</td>
+                        <td class="title-col"><a href="https://www.alio.go.kr/occasional/bidDtl.do?pageNo=1&amp;seq=3529248&amp;type=title" target="_blank" rel="noopener noreferrer" class="notice-title">[입찰공고] FX트레이딩 디지털전환 (SW) 유지관리 2026 (긴급)</a></td>
+                        <td class="date-col">2026-05-15</td>
+                        <td class="deadline-col">2026-05-22</td>
+                    </tr>
+
+                    <tr>
                         <td class="org-col">나라장터-입찰공고</td>
+                        <td class="title-col"><a href="https://www.g2b.go.kr/link/PNPE027_01/single/?bidPbancNo=R26BK01524787&amp;bidPbancOrd=000" target="_blank" rel="noopener noreferrer" class="notice-title">AI 기반 패션기업 수요예측을 위한 외부 환경 데이터 구축</a></td>
+                        <td class="date-col">2026-05-15</td>
+                        <td class="deadline-col">2026-05-26</td>
+                    </tr>
+
+                    <tr>
+                        <td class="org-col">나라장터-입찰공고</td>
+                        <td class="title-col"><a href="https://www.g2b.go.kr/link/PNPE027_01/single/?bidPbancNo=R26BK01520491&amp;bidPbancOrd=000" target="_blank" rel="noopener noreferrer" class="notice-title">충청유교문화 통합 디지털 플랫폼 구축 사업 실감콘텐츠 제작 용역</a></td>
+                        <td class="date-col">2026-05-15</td>
+                        <td class="deadline-col">2026-05-27</td>
+                    </tr>
+
+                    <tr>
+                        <td class="org-col">나라장터-입찰공고</td>
+                        <td class="title-col"><a href="https://www.g2b.go.kr/link/PNPE027_01/single/?bidPbancNo=R26BK01520019&amp;bidPbancOrd=000" target="_blank" rel="noopener noreferrer" class="notice-title">[국립대학 정보통신(ICT) 고도화 사업]클라우드 기반의 가상실습실 서비스 연장 사업</a></td>
+                        <td class="date-col">2026-05-15</td>
+                        <td class="deadline-col">2026-05-26</td>
+                    </tr>
+
+                    <tr>
+                        <td class="org-col">나라장터-입찰공고</td>
+                        <td class="title-col"><a href="https://www.g2b.go.kr/link/PNPE027_01/single/?bidPbancNo=R26BK01524637&amp;bidPbancOrd=000" target="_blank" rel="noopener noreferrer" class="notice-title">데이터분석연구본부 SSO 관리시스템 유지보수 및 기술지원</a></td>
+                        <td class="date-col">2026-05-15</td>
+                        <td class="deadline-col">2026-05-18</td>
+                    </tr>
+
+                    <tr>
+                        <td class="org-col">나라장터-입찰공고</td>
+                        <td class="title-col"><a href="https://www.g2b.go.kr/link/PNPE027_01/single/?bidPbancNo=R26BK01524682&amp;bidPbancOrd=000" target="_blank" rel="noopener noreferrer" class="notice-title">대심도 철도시설물 대피를 위한 데이터 기반 시뮬레이션 및 예측 시스템 개발</a></td>
+                        <td class="date-col">2026-05-15</td>
+                        <td class="deadline-col">2026-05-15</td>
+                    </tr>
+
+                    <tr>
+                        <td class="org-col">나라장터-입찰공고</td>
+                        <td class="title-col"><a href="https://www.g2b.go.kr/link/PNPE027_01/single/?bidPbancNo=R26BK01524676&amp;bidPbancOrd=000" target="_blank" rel="noopener noreferrer" class="notice-title">온라인피해상담지원시스템 관계형DB 구축 및 고도화</a></td>
+                        <td class="date-col">2026-05-15</td>
+                        <td class="deadline-col">-</td>
+                    </tr>
+
+                    <tr>
+                        <td class="org-col">나라장터-입찰공고</td>
+                        <td class="title-col"><a href="https://www.g2b.go.kr/link/PNPE027_01/single/?bidPbancNo=R26BK01524087&amp;bidPbancOrd=000" target="_blank" rel="noopener noreferrer" class="notice-title">제주 사고손상감시시스템 고도화 구축 용역</a></td>
+                        <td class="date-col">2026-05-15</td>
+                        <td class="deadline-col">-</td>
+                    </tr>
+
+                    <tr>
+                        <td class="org-col">나라장터-입찰공고</td>
+                        <td class="title-col"><a href="https://www.g2b.go.kr/link/PNPE027_01/single/?bidPbancNo=R26BK01523754&amp;bidPbancOrd=000" target="_blank" rel="noopener noreferrer" class="notice-title">KRC 생성형AI 클라우드 서비스 임차 용역</a></td>
+                        <td class="date-col">2026-05-15</td>
+                        <td class="deadline-col">2026-05-15</td>
+                    </tr>
+
+                    <tr>
+                        <td class="org-col">나라장터-입찰공고</td>
+                        <td class="title-col"><a href="https://www.g2b.go.kr/link/PNPE027_01/single/?bidPbancNo=R26BK01521640&amp;bidPbancOrd=000" target="_blank" rel="noopener noreferrer" class="notice-title">물환경정보시스템 구축(2026)</a></td>
+                        <td class="date-col">2026-05-15</td>
+                        <td class="deadline-col">2026-05-18</td>
+                    </tr>
+
+                    <tr>
+                        <td class="org-col">나라장터-입찰공고 외 1곳</td>
                         <td class="title-col"><a href="https://www.g2b.go.kr/link/PNPE027_01/single/?bidPbancNo=R26BK01524342&amp;bidPbancOrd=000" target="_blank" rel="noopener noreferrer" class="notice-title">(수의시담) 유교책판 RFID 전자태그 부착 및 RFID시스템 유지보수 용역</a></td>
                         <td class="date-col">2026-05-15</td>
                         <td class="deadline-col">2026-05-15</td>
@@ -764,13 +842,6 @@
                         <td class="title-col"><a href="https://www.g2b.go.kr/link/PNPE027_01/single/?bidPbancNo=R26BK01519149&amp;bidPbancOrd=000" target="_blank" rel="noopener noreferrer" class="notice-title">함정 MRO 통합 공급망 플랫폼 구축사업(장기계속)</a></td>
                         <td class="date-col">2026-05-14</td>
                         <td class="deadline-col">2026-06-25</td>
-                    </tr>
-
-                    <tr>
-                        <td class="org-col">한국고용정보원</td>
-                        <td class="title-col"><a href="https://www.alio.go.kr/occasional/bidDtl.do?pageNo=1&amp;seq=3528407&amp;type=title" target="_blank" rel="noopener noreferrer" class="notice-title">고용정보시스템 통합운영 유지보수 사업</a></td>
-                        <td class="date-col">2026-05-13</td>
-                        <td class="deadline-col">2026-05-15</td>
                     </tr>
 
                     <tr>
@@ -1992,7 +2063,7 @@
                     </tr>
 
                     <tr>
-                        <td class="org-col">중기부 R&amp;D 외 28곳</td>
+                        <td class="org-col">중기부 R&amp;D 외 29곳</td>
                         <td class="title-col"><a href="https://www.smtech.go.kr/front/ifg/no/notice02_detail.do;jsessionid=bbm1M3u7ya2QRI0Rr1oO98efpLsERiJx8xc1nUao6cgeeI1XTrw3aKaaBbNBAabq.smwas2_servlet_engine4?buclYy=&amp;ancmId=S02864&amp;buclCd=S9171&amp;dtlAncmSn=1&amp;schdSe=MO5005&amp;aplySn=1&amp;searchCondition=&amp;searchKeyword=&amp;pageIndex=1" target="_blank" rel="noopener noreferrer" class="notice-title">2026년 제3차 중소기업 R&amp;D 전담은행 투자지원 추천기업(호남·제주권) 모집 공고</a></td>
                         <td class="date-col">2026-05-11</td>
                         <td class="deadline-col">-</td>
@@ -3462,13 +3533,6 @@
                     </tr>
 
                     <tr>
-                        <td class="org-col">중소기업은행</td>
-                        <td class="title-col"><a href="https://www.alio.go.kr/occasional/bidDtl.do?pageNo=1&amp;seq=3525112&amp;type=title" target="_blank" rel="noopener noreferrer" class="notice-title">[입찰공고] 대학병원 연구비종합관리시스템 신규 구축(경희대학교병원)(물품, 서버)</a></td>
-                        <td class="date-col">2026-05-06</td>
-                        <td class="deadline-col">2026-05-15</td>
-                    </tr>
-
-                    <tr>
                         <td class="org-col">나라장터-입찰공고</td>
                         <td class="title-col"><a href="https://www.g2b.go.kr/link/PNPE027_01/single/?bidPbancNo=R26BK01506343&amp;bidPbancOrd=000" target="_blank" rel="noopener noreferrer" class="notice-title">수치표고모형 품질검사 SW개발 및 시범구축</a></td>
                         <td class="date-col">2026-05-06</td>
@@ -3870,13 +3934,6 @@
                     <tr>
                         <td class="org-col">나라장터-입찰공고 외 1곳</td>
                         <td class="title-col"><a href="https://www.g2b.go.kr/link/PNPE027_01/single/?bidPbancNo=R26BK01503417&amp;bidPbancOrd=000" target="_blank" rel="noopener noreferrer" class="notice-title">(재공고)2026년 지하안전정보시스템 기능개선 사업</a></td>
-                        <td class="date-col">2026-05-04</td>
-                        <td class="deadline-col">2026-05-15</td>
-                    </tr>
-
-                    <tr>
-                        <td class="org-col">한국도로공사</td>
-                        <td class="title-col"><a href="https://www.alio.go.kr/occasional/bidDtl.do?pageNo=1&amp;seq=3524608&amp;type=title" target="_blank" rel="noopener noreferrer" class="notice-title">AI기반 교통량 조사 시스템 개발을 위한 인프라 구축</a></td>
                         <td class="date-col">2026-05-04</td>
                         <td class="deadline-col">2026-05-15</td>
                     </tr>
@@ -4883,7 +4940,7 @@
                     </tr>
 
                     <tr>
-                        <td class="org-col">중기부 R&amp;D 외 126곳</td>
+                        <td class="org-col">중기부 R&amp;D 외 127곳</td>
                         <td class="title-col"><a href="https://www.smtech.go.kr/front/ifg/no/notice02_detail.do;jsessionid=Hnkrq2t6dS6zL6TrDFq5cRyMlc2DBrM6ayMpH89uZRZmMbZVtIBFQ0x5OaZ39v3L.smwas4_servlet_engine4?buclYy=&amp;ancmId=S02847&amp;buclCd=S6041&amp;dtlAncmSn=4&amp;schdSe=MO5005&amp;aplySn=1&amp;searchCondition=&amp;searchKeyword=&amp;pageIndex=1" target="_blank" rel="noopener noreferrer" class="notice-title">2026년 중소기업 연구인력지원사업(파견) 5월 공고</a></td>
                         <td class="date-col">2026-04-29</td>
                         <td class="deadline-col">-</td>
@@ -5303,28 +5360,28 @@
                     </tr>
 
                     <tr>
-                        <td class="org-col">중기부 R&amp;D 외 139곳</td>
+                        <td class="org-col">중기부 R&amp;D 외 140곳</td>
                         <td class="title-col"><a href="https://www.smtech.go.kr/front/ifg/no/notice02_detail.do;jsessionid=dRpdvSvvRdMoW6u1dTDjA2hmFn3DlFd6Cv7HDCmaORopSiJqtqww1BUCHI3qK9Kg.smwas3_servlet_engine2?buclYy=&amp;ancmId=S02862&amp;buclCd=S9H01&amp;dtlAncmSn=1&amp;schdSe=MO5005&amp;aplySn=1&amp;searchCondition=&amp;searchKeyword=&amp;pageIndex=1" target="_blank" rel="noopener noreferrer" class="notice-title">2026년도 기술사업화 패키지 지원사업 제2차 시행계획 공고(R&amp;D 수행 창업기업)</a></td>
                         <td class="date-col">2026-04-27</td>
                         <td class="deadline-col">-</td>
                     </tr>
 
                     <tr>
-                        <td class="org-col">중기부 R&amp;D 외 139곳</td>
+                        <td class="org-col">중기부 R&amp;D 외 140곳</td>
                         <td class="title-col"><a href="https://www.smtech.go.kr/front/ifg/no/notice02_detail.do;jsessionid=dRpdvSvvRdMoW6u1dTDjA2hmFn3DlFd6Cv7HDCmaORopSiJqtqww1BUCHI3qK9Kg.smwas3_servlet_engine2?buclYy=&amp;ancmId=S02861&amp;buclCd=S9H01&amp;dtlAncmSn=1&amp;schdSe=MO5005&amp;aplySn=1&amp;searchCondition=&amp;searchKeyword=&amp;pageIndex=1" target="_blank" rel="noopener noreferrer" class="notice-title">2026년도 기술사업화 패키지 지원사업 제2차 시행계획 공고(규제혁신 연계)</a></td>
                         <td class="date-col">2026-04-27</td>
                         <td class="deadline-col">-</td>
                     </tr>
 
                     <tr>
-                        <td class="org-col">중기부 R&amp;D 외 139곳</td>
+                        <td class="org-col">중기부 R&amp;D 외 140곳</td>
                         <td class="title-col"><a href="https://www.smtech.go.kr/front/ifg/no/notice02_detail.do;jsessionid=dRpdvSvvRdMoW6u1dTDjA2hmFn3DlFd6Cv7HDCmaORopSiJqtqww1BUCHI3qK9Kg.smwas3_servlet_engine2?buclYy=&amp;ancmId=S02859&amp;buclCd=S9H01&amp;dtlAncmSn=1&amp;schdSe=MO5005&amp;aplySn=1&amp;searchCondition=&amp;searchKeyword=&amp;pageIndex=1" target="_blank" rel="noopener noreferrer" class="notice-title">2026년도 기술사업화 패키지 지원사업 제2차 시행계획 공고(정부 R&amp;D 우수과제)</a></td>
                         <td class="date-col">2026-04-27</td>
                         <td class="deadline-col">-</td>
                     </tr>
 
                     <tr>
-                        <td class="org-col">중기부 R&amp;D 외 139곳</td>
+                        <td class="org-col">중기부 R&amp;D 외 140곳</td>
                         <td class="title-col"><a href="https://www.smtech.go.kr/front/ifg/no/notice02_detail.do;jsessionid=dRpdvSvvRdMoW6u1dTDjA2hmFn3DlFd6Cv7HDCmaORopSiJqtqww1BUCHI3qK9Kg.smwas3_servlet_engine2?buclYy=&amp;ancmId=S02860&amp;buclCd=S9H01&amp;dtlAncmSn=2&amp;schdSe=MO5005&amp;aplySn=1&amp;searchCondition=&amp;searchKeyword=&amp;pageIndex=1" target="_blank" rel="noopener noreferrer" class="notice-title">2026년도 기술사업화 패키지 지원사업 제2차 시행계획 공고(기술거래플랫폼 연계)</a></td>
                         <td class="date-col">2026-04-27</td>
                         <td class="deadline-col">-</td>
@@ -6381,13 +6438,6 @@
                     </tr>
 
                     <tr>
-                        <td class="org-col">부천시</td>
-                        <td class="title-col"><a href="https://eminwon.bucheon.go.kr/emwp/gov/mogaha/ntis/web/ofr/action/OfrAction.do" target="_blank" rel="noopener noreferrer" class="notice-title">불용물품(컴퓨터 서버 및 네트워크장비용 랙) 매각 전자입찰 공고</a></td>
-                        <td class="date-col">2026-04-15</td>
-                        <td class="deadline-col">-</td>
-                    </tr>
-
-                    <tr>
                         <td class="org-col">김포시</td>
                         <td class="title-col"><a href="https://www.gimpo.go.kr/portal/selectBbsNttView.do?key=999&amp;bbsNo=292&amp;searchCnd=all&amp;deleteAt=N&amp;pageUnit=10&amp;pageIndex=1&amp;nttNo=971079" target="_blank" rel="noopener noreferrer" class="notice-title">(국가동물보호정보시스템) 반려동물 주소 등 변경신고 방법 안내</a></td>
                         <td class="date-col">2026-04-21</td>
@@ -6679,13 +6729,6 @@
                         <td class="title-col"><a href="https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&amp;pbancSn=176391" target="_blank" rel="noopener noreferrer" class="notice-title">멘토링ᆞ컨설팅ᆞ교육 창업지원사업 예비위원단 재모집 (신산업분야) 창업지원사업 예비위원단 재모집 (신산업분야) 창업진흥원</a></td>
                         <td class="date-col">2026-04-22</td>
                         <td class="deadline-col">2026-11-30</td>
-                    </tr>
-
-                    <tr>
-                        <td class="org-col">K-Startup</td>
-                        <td class="title-col"><a href="https://www.k-startup.go.kr/web/contents/bizpbanc-ongoing.do?schM=view&amp;pbancSn=176892" target="_blank" rel="noopener noreferrer" class="notice-title">「모두의 창업 프로젝트」통합 모집 수정공고</a></td>
-                        <td class="date-col">2026-04-22</td>
-                        <td class="deadline-col">2026-05-15</td>
                     </tr>
 
                     <tr>
