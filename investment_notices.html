@@ -6,20 +6,35 @@
     <title>출자공고 모음 - 폴라리스아시아</title>
     <meta name='robots' content='noindex, nofollow'>
     <script>
-        function checkPassword() {
-        var password = prompt("Please enter the password:", "");
-        var today = new Date();
-        var yyyy = today.getFullYear();
-        var mm = String(today.getMonth() + 1).padStart(2, '0');
-        var dd = String(today.getDate()).padStart(2, '0');
-        var correctPassword = '' + yyyy + mm + dd;
-        if (password !== correctPassword) {
+        document.documentElement.style.visibility = 'hidden';
+        function denyAccess() {
             alert("Incorrect password.");
             window.location.href = "about:blank";
         }
+        async function checkPassword() {
+            try {
+                if (!window.crypto || !crypto.subtle) {
+                    denyAccess();
+                    return;
+                }
+                var password = prompt("내부 직원용 페이지입니다. 비밀번호를 입력해주세요:", "");
+                var encoder = new TextEncoder();
+                var hashBuffer = await crypto.subtle.digest('SHA-256', encoder.encode(password || ''));
+                var hashArray = Array.from(new Uint8Array(hashBuffer));
+                var passwordHash = hashArray.map(function(byte) { return byte.toString(16).padStart(2, '0'); }).join('');
+                var correctHash = 'cc0993cb09acb7cfffde863f748567afb13aa44b109f517a9584a966c2b62cc2';
+                if (passwordHash !== correctHash) {
+                    denyAccess();
+                    return;
+                }
+                document.documentElement.style.visibility = 'visible';
+            } catch (error) {
+                denyAccess();
+            }
         }
         checkPassword();
     </script>
+    <noscript><style>html { display: none; }</style></noscript>
     <style>
         * { box-sizing: border-box; }
         body {

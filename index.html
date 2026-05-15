@@ -3,88 +3,910 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>폴라리스아시아(주) - Polaris Asia Company</title>
+    <title>폴라리스아시아(주) | 경영컨설팅 · AI 개발 · AX/DX 컨설팅</title>
+    <meta name="description" content="폴라리스아시아는 경영컨설팅, AI 기반 개발, AX/DX 전환 컨설팅, 창업지원사업 제안서 교육을 제공하는 실행 중심 컨설팅 회사입니다.">
     <style>
-        body {
-            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f9f9f9;
+        :root {
+            --bg: #07111f;
+            --bg-soft: #0f1b2e;
+            --card: #ffffff;
+            --text: #101827;
+            --muted: #607087;
+            --line: #e5edf6;
+            --accent: #22d3ee;
+            --accent-2: #2563eb;
+            --accent-3: #14b8a6;
+            --cream: #f7fafc;
+            --shadow: 0 24px 80px rgba(8, 20, 38, 0.16);
         }
-        header {
-            text-align: center;
-            padding: 50px 0;
-            border-bottom: 2px solid #2c3e50;
-        }
-        h1 { margin: 0; color: #2c3e50; font-size: 2.5rem; }
-        .subtitle { color: #7f8c8d; font-size: 1.2rem; margin-top: 10px; }
-        
-        section {
-            background: white;
-            padding: 30px;
-            margin-top: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-        h2 { border-left: 5px solid #2c3e50; padding-left: 15px; color: #2c3e50; }
-        
-        .notice-item {
-            border-bottom: 1px solid #eee;
-            padding: 15px 0;
-        }
-        .notice-item:last-child { border-bottom: none; }
-        .notice-date { font-size: 0.9rem; color: #666; display: block; margin-bottom: 5px; }
-        .notice-title { font-weight: bold; font-size: 1.1rem; }
 
-        footer {
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            margin: 0;
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Noto Sans KR', sans-serif;
+            color: var(--text);
+            background: var(--cream);
+            line-height: 1.65;
+        }
+        a { color: inherit; text-decoration: none; }
+        .container { width: min(1120px, calc(100% - 40px)); margin: 0 auto; }
+
+        /* ── Header ── */
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.9);
+        }
+        .nav {
+            min-height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+        }
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+        }
+        .brand-mark {
+            width: 34px;
+            height: 34px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            display: grid;
+            place-items: center;
+            color: white;
+            font-weight: 900;
+            box-shadow: 0 12px 30px rgba(34, 211, 238, 0.28);
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 26px;
+            font-size: 0.94rem;
+            color: #334155;
+            font-weight: 650;
+        }
+        .nav-links a:hover { color: var(--accent-2); }
+        .nav-cta {
+            padding: 10px 20px;
+            border-radius: 999px;
+            color: white !important;
+            background: #0f172a;
+            font-weight: 700;
+            transition: background 0.2s;
+        }
+        .nav-cta:hover { background: var(--accent-2) !important; }
+
+        /* ── Hero ── */
+        .hero {
+            position: relative;
+            overflow: hidden;
+            color: white;
+            background:
+                radial-gradient(circle at 78% 20%, rgba(34, 211, 238, 0.26), transparent 28%),
+                radial-gradient(circle at 25% 12%, rgba(37, 99, 235, 0.24), transparent 24%),
+                linear-gradient(135deg, #07111f 0%, #0c1730 48%, #08111f 100%);
+        }
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.055) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.055) 1px, transparent 1px);
+            background-size: 56px 56px;
+            mask-image: linear-gradient(to bottom, black, transparent 88%);
+            pointer-events: none;
+        }
+        .hero-inner {
+            position: relative;
+            min-height: 720px;
+            display: grid;
+            grid-template-columns: minmax(0, 1.05fr) minmax(360px, 0.95fr);
+            align-items: center;
+            gap: 56px;
+            padding: 96px 0 88px;
+        }
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 13px;
+            border: 1px solid rgba(125, 211, 252, 0.28);
+            border-radius: 999px;
+            background: rgba(15, 23, 42, 0.56);
+            color: #bae6fd;
+            font-size: 0.88rem;
+            font-weight: 700;
+        }
+        h1 {
+            margin: 26px 0 22px;
+            font-size: clamp(2.6rem, 5.8vw, 4.6rem);
+            line-height: 1.05;
+            letter-spacing: -0.065em;
+            word-break: keep-all;
+        }
+        .gradient-text {
+            background: linear-gradient(90deg, #67e8f9, #60a5fa, #2dd4bf);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .hero-copy {
+            max-width: 620px;
+            color: #cbd5e1;
+            font-size: 1.12rem;
+            margin: 0 0 34px;
+            line-height: 1.75;
+        }
+        .hero-actions, .section-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            align-items: center;
+        }
+        .hero-stats {
+            display: flex;
+            gap: 32px;
+            margin-top: 40px;
+            padding-top: 32px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        .hero-stat strong {
+            display: block;
+            font-size: 1.6rem;
+            font-weight: 900;
+            letter-spacing: -0.04em;
+            color: #67e8f9;
+        }
+        .hero-stat span {
+            font-size: 0.82rem;
+            color: #94a3b8;
+        }
+
+        /* ── Buttons ── */
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            min-height: 50px;
+            padding: 0 24px;
+            border-radius: 999px;
+            font-weight: 800;
+            border: 1px solid transparent;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+            font-family: inherit;
+            cursor: pointer;
+            font-size: 0.97rem;
+        }
+        .button:hover { transform: translateY(-2px); }
+        .button.primary {
+            color: #03121f;
+            background: linear-gradient(135deg, #67e8f9, #38bdf8 48%, #2dd4bf);
+            box-shadow: 0 18px 40px rgba(34, 211, 238, 0.28);
+        }
+        .button.secondary {
+            color: white;
+            background: rgba(255, 255, 255, 0.09);
+            border-color: rgba(255, 255, 255, 0.22);
+        }
+        .button.dark {
+            color: white;
+            background: #0f172a;
+        }
+        .button.light {
+            color: #0f172a;
+            background: white;
+            border-color: var(--line);
+        }
+        .button.disabled,
+        .button:disabled {
+            cursor: not-allowed;
+            opacity: 0.72;
+        }
+        .button.disabled:hover,
+        .button:disabled:hover { transform: none; }
+
+        /* ── Orbit Card ── */
+        .orbit-card {
+            position: relative;
+            min-height: 500px;
+            border: 1px solid rgba(125, 211, 252, 0.18);
+            border-radius: 36px;
+            background: linear-gradient(145deg, rgba(15, 23, 42, 0.78), rgba(15, 23, 42, 0.32));
+            box-shadow: 0 40px 120px rgba(0, 0, 0, 0.26);
+            overflow: hidden;
+        }
+        .orbit-card::before {
+            content: "";
+            position: absolute;
+            inset: 44px;
+            border: 1px dashed rgba(148, 163, 184, 0.32);
+            border-radius: 50%;
+        }
+        .orbit-card::after {
+            content: "";
+            position: absolute;
+            inset: 100px;
+            border: 1px dashed rgba(148, 163, 184, 0.22);
+            border-radius: 50%;
+        }
+        .core-node {
+            position: absolute;
+            left: 50%; top: 50%;
+            transform: translate(-50%, -50%);
+            width: 154px; height: 154px;
+            border-radius: 38px;
+            display: grid;
+            place-items: center;
             text-align: center;
-            margin-top: 50px;
+            background: linear-gradient(135deg, rgba(34, 211, 238, 0.95), rgba(37, 99, 235, 0.95));
+            color: white;
+            font-size: 1.3rem;
+            font-weight: 900;
+            letter-spacing: -0.04em;
+            box-shadow: 0 28px 80px rgba(37, 99, 235, 0.36);
+            z-index: 2;
+        }
+        .node {
+            position: absolute;
+            width: 156px;
+            min-height: 82px;
+            padding: 15px;
+            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.09);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            color: #e0f2fe;
+            box-shadow: 0 20px 45px rgba(0,0,0,0.18);
+            word-break: keep-all;
+        }
+        .node strong { display: block; color: white; font-size: 1.03rem; }
+        .node span { color: #94a3b8; font-size: 0.78rem; }
+        .node.finance { left: 42px; top: 58px; }
+        .node.ai { right: 42px; top: 74px; }
+        .node.dx { left: 34px; bottom: 82px; }
+        .node.consulting { right: 34px; bottom: 70px; }
+        .node.education { left: 50%; bottom: 28px; transform: translateX(-50%); }
+
+        /* ── Section Common ── */
+        section { padding: 92px 0; }
+        .section-head {
+            max-width: 760px;
+            margin-bottom: 48px;
+        }
+        .section-label {
+            color: var(--accent-2);
+            font-size: 0.84rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            font-weight: 900;
+        }
+        h2 {
+            margin: 10px 0 16px;
+            font-size: clamp(2rem, 4.4vw, 3.4rem);
+            line-height: 1.1;
+            letter-spacing: -0.06em;
+        }
+        .section-desc {
+            margin: 0;
+            color: var(--muted);
+            font-size: 1.06rem;
+            line-height: 1.75;
+        }
+
+        /* ── Service Cards ── */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 20px;
+        }
+        .card {
+            background: white;
+            border: 1px solid var(--line);
+            border-radius: 28px;
+            padding: 32px;
+            box-shadow: 0 16px 55px rgba(15, 23, 42, 0.06);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 28px 70px rgba(15, 23, 42, 0.1);
+        }
+        .card .icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 18px;
+            display: grid;
+            place-items: center;
+            margin-bottom: 22px;
+            color: #0f172a;
+            background: linear-gradient(135deg, #cffafe, #dbeafe);
+            font-size: 1.5rem;
+        }
+        .card h3 { margin: 0 0 12px; letter-spacing: -0.035em; line-height: 1.25; font-size: 1.18rem; }
+        .card p { margin: 0; color: var(--muted); font-size: 0.98rem; line-height: 1.7; }
+        .card-detail {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--line);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .tag {
+            padding: 4px 10px;
+            border-radius: 999px;
+            background: #f1f5f9;
+            color: #475569;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        /* ── Dark Section (AI/DX) ── */
+        .dark-section {
+            color: white;
+            background: linear-gradient(135deg, #07111f, #0f1b2e);
+        }
+        .dark-section .section-desc { color: #cbd5e1; }
+        .capability-grid {
+            display: grid;
+            grid-template-columns: 0.95fr 1.05fr;
+            gap: 28px;
+            align-items: stretch;
+        }
+        .feature-panel {
+            border-radius: 34px;
+            padding: 38px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255,255,255,0.12);
+            min-height: 100%;
+        }
+        .feature-panel ul {
+            list-style: none;
+            padding: 0;
+            margin: 26px 0 0;
+            display: grid;
+            gap: 14px;
+        }
+        .feature-panel li {
+            padding-left: 28px;
+            position: relative;
+            color: #dbeafe;
+            font-size: 0.97rem;
+            line-height: 1.65;
+        }
+        .feature-panel li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: 900;
+        }
+        .usecases {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+        }
+        .usecase {
+            padding: 24px;
+            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255,255,255,0.11);
+        }
+        .usecase strong { display: block; margin-bottom: 8px; font-size: 1.02rem; }
+        .usecase span { color: #bfdbfe; font-size: 0.93rem; line-height: 1.6; }
+
+        /* ── Lecture Section ── */
+        .lecture {
+            background:
+                radial-gradient(circle at 86% 12%, rgba(34, 211, 238, 0.1), transparent 26%),
+                #f8fafc;
+        }
+        .lecture-wrap {
+            display: grid;
+            grid-template-columns: 0.9fr 1.1fr;
+            gap: 32px;
+            align-items: start;
+        }
+        .lecture-highlight {
+            position: sticky;
+            top: 104px;
+            background: #0f172a;
+            color: white;
+            border-radius: 34px;
+            padding: 38px;
+            box-shadow: var(--shadow);
+        }
+        .lecture-highlight h2 {
+            font-size: clamp(1.5rem, 2.8vw, 2.1rem);
+            margin-top: 14px;
+        }
+        .lecture-highlight p {
+            color: #cbd5e1;
+            font-size: 0.97rem;
+            line-height: 1.75;
+        }
+        .price {
+            margin: 24px 0;
+            padding: 24px;
+            border-radius: 26px;
+            background: linear-gradient(135deg, rgba(34,211,238,0.18), rgba(37,99,235,0.22));
+            border: 1px solid rgba(125, 211, 252, 0.22);
+        }
+        .price strong { display: block; font-size: 2.2rem; line-height: 1.1; letter-spacing: -0.04em; }
+        .price span { color: #cbd5e1; font-size: 0.9rem; }
+        .lecture-list {
+            display: grid;
+            gap: 18px;
+        }
+        .lecture-card {
+            background: white;
+            border: 1px solid var(--line);
+            border-radius: 28px;
+            padding: 28px;
+            box-shadow: 0 14px 44px rgba(15, 23, 42, 0.06);
+        }
+        .lecture-card h3 { margin: 0 0 10px; letter-spacing: -0.035em; line-height: 1.25; font-size: 1.1rem; }
+        .lecture-card p { margin: 0; color: var(--muted); font-size: 0.97rem; line-height: 1.7; }
+        .lecture-meta {
+            display: inline-flex;
+            margin-bottom: 13px;
+            padding: 6px 12px;
+            border-radius: 999px;
+            background: #e0f2fe;
+            color: #0369a1;
+            font-size: 0.82rem;
+            font-weight: 900;
+        }
+        .target-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+            margin-top: 20px;
+        }
+        .target-item {
+            padding: 16px 18px;
+            border-radius: 18px;
+            background: #f1f5f9;
+            color: #334155;
+            font-weight: 650;
+            font-size: 0.94rem;
+            line-height: 1.5;
+        }
+
+        /* ── Instructor Section ── */
+        .instructor-section {
+            background: white;
+            border-top: 1px solid var(--line);
+        }
+        .instructor-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 24px;
+            margin-top: 8px;
+        }
+        .instructor-card {
+            display: flex;
+            gap: 20px;
+            padding: 28px;
+            border-radius: 28px;
+            border: 1px solid var(--line);
+            background: var(--cream);
+            align-items: flex-start;
+        }
+        .instructor-avatar {
+            flex-shrink: 0;
+            width: 64px;
+            height: 64px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #cffafe, #dbeafe);
+            display: grid;
+            place-items: center;
+            font-size: 1.6rem;
+        }
+        .instructor-info h4 {
+            margin: 0 0 4px;
+            font-size: 1.05rem;
+            letter-spacing: -0.03em;
+        }
+        .instructor-role {
+            display: inline-block;
+            margin-bottom: 10px;
+            padding: 3px 10px;
+            border-radius: 999px;
+            background: #e0f2fe;
+            color: #0369a1;
+            font-size: 0.78rem;
+            font-weight: 800;
+        }
+        .instructor-info p {
+            margin: 0;
+            color: var(--muted);
             font-size: 0.9rem;
-            color: #888;
+            line-height: 1.65;
+        }
+
+        /* ── Process Section ── */
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 16px;
+        }
+        .process-step {
+            padding: 28px;
+            border-radius: 26px;
+            background: white;
+            border: 1px solid var(--line);
+        }
+        .process-step h3 { margin: 0 0 10px; letter-spacing: -0.035em; line-height: 1.25; }
+        .process-step p { margin: 0; color: var(--muted); font-size: 0.97rem; }
+        .step-num {
+            display: inline-grid;
+            place-items: center;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            color: white;
+            background: #0f172a;
+            font-weight: 900;
+            margin-bottom: 18px;
+            font-size: 0.9rem;
+        }
+
+        /* ── Contact Section ── */
+        .contact {
+            color: white;
+            background: linear-gradient(135deg, #0f172a, #111827 54%, #0b1120);
+        }
+        .contact-box {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: center;
+            gap: 30px;
+            padding: 48px;
+            border-radius: 34px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255,255,255,0.12);
+        }
+        .contact h2 { margin-top: 0; font-size: clamp(1.6rem, 3.2vw, 2.6rem); }
+        .contact p { color: #94a3b8; margin-bottom: 0; font-size: 0.97rem; line-height: 1.7; }
+        .contact-email {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        .contact-email small {
+            color: #64748b;
+            font-size: 0.82rem;
+        }
+
+        /* ── Footer ── */
+        footer {
+            padding: 36px 0;
+            color: #64748b;
+            background: #f8fafc;
+            border-top: 1px solid var(--line);
+            font-size: 0.9rem;
+        }
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .footer-brand {
+            font-weight: 700;
+            color: #334155;
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 920px) {
+            .nav-links { display: none; }
+            .hero-inner,
+            .capability-grid,
+            .lecture-wrap,
+            .contact-box { grid-template-columns: 1fr; }
+            .hero-inner { min-height: auto; padding-top: 72px; }
+            .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .process-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .lecture-highlight { position: static; }
+            .contact-box { grid-template-columns: 1fr; text-align: center; }
+            .contact-email { align-items: flex-start; }
+        }
+        @media (max-width: 620px) {
+            .container { width: min(100% - 28px, 1120px); }
+            .hero-inner { gap: 34px; }
+            .orbit-card { min-height: 420px; border-radius: 28px; }
+            .node { width: 136px; padding: 12px; }
+            .core-node { width: 128px; height: 128px; }
+            .cards,
+            .process-grid,
+            .usecases,
+            .target-grid,
+            .instructor-grid { grid-template-columns: 1fr; }
+            .contact-box,
+            .lecture-highlight,
+            .card { padding: 24px; }
+            .hero-stats { flex-wrap: wrap; gap: 20px; }
         }
     </style>
 </head>
 <body>
-
-    <header>
-        <h1>Polaris Asia Company</h1>
-        <div class="subtitle">폴라리스아시아(주)</div>
+    <header class="site-header">
+        <div class="container nav">
+            <a href="#top" class="brand" aria-label="Polaris Asia home">
+                <span class="brand-mark">P</span>
+                <span>Polaris Asia</span>
+            </a>
+            <nav class="nav-links" aria-label="주요 메뉴">
+                <a href="#services">Services</a>
+                <a href="#ai-dx">AI / AX·DX</a>
+                <a href="#lecture">Startup Lecture</a>
+                <a href="#contact" class="nav-cta">문의하기</a>
+            </nav>
+        </div>
     </header>
 
-    <section>
-        <h2>Company Info</h2>
-        <p>
-            폴라리스아시아(주)는 소프트웨어, 컴퓨터 시스템 등을 개발하고 운영하는 기업입니다.<br>
-            데이터 분석 알고리즘과 인공지능 기술을 활용하여 새로운 가치를 창출하고 있습니다.
-        </p>
-        <p>
-            <strong>연락처:</strong> contact@polaris-a.com
-        </p>
-    </section>
+    <main id="top">
 
-    <!-- <section>
-        <h2>Public Notice (공고)</h2>
-        <div class="notice-list">
-            <div class="notice-item">
-                <span class="notice-date">2025-12-23</span>
-                <span class="notice-title">제3회 기명식 무보증 사모 전환사채 발행 안내</span>
-                <div>제3회 기명식 무보증 사모 전환사채를 발행 예정이오니 참고해주시기 바랍니다.<br>
-                - 발행금액: 90,000,000원<br>
-                - 발행일: 2025년 12월 30일<br>
-                - 만기일: 2028년 12월 30일<br>
-                - 전환청구기간: 2025년 12월 31일 ~ 2028년 12월 29일<br>
-                자세한 사항은 별도 문의 바랍니다.</div>
+        <!-- ── Hero ── -->
+        <section class="hero">
+            <div class="container hero-inner">
+                <div>
+                    <span class="eyebrow">Business Consulting · AI Development · AX/DX</span>
+                    <h1>비즈니스 혁신,<br><span class="gradient-text">AI와 데이터</span> 기반<br>컨설팅으로 완성하다</h1>
+                    <p class="hero-copy">
+                        막연한 아이디어와 과제를 실행 가능한 비즈니스 모델과 시스템으로 실현시킵니다.<br>
+                        경영컨설팅, AI 기반 개발, AX·DX 전환 컨설팅을 통해 기업과 창업자의 성장을 함께 설계합니다.
+                    </p>
+                    <div class="hero-actions">
+                        <a class="button primary" href="#contact">컨설팅 문의하기 →</a>
+                        <a class="button secondary" href="#lecture">창업지원사업 특강 보기 →</a>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="hero-stat">
+                            <strong>3대</strong>
+                            <span>핵심 서비스 영역</span>
+                        </div>
+                        <div class="hero-stat">
+                            <strong>220만원</strong>
+                            <span>이하 창업 특강 수강료</span>
+                        </div>
+                        <div class="hero-stat">
+                            <strong>VC 심사역</strong>
+                            <span>출신 강사진</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="orbit-card" aria-label="Polaris Asia capabilities diagram">
+                    <div class="core-node">Polaris<br>Asia</div>
+                    <div class="node finance"><strong>Strategy</strong><span>경영 전략 / 사업모델</span></div>
+                    <div class="node ai"><strong>AI Dev</strong><span>자동화 / 분석 시스템</span></div>
+                    <div class="node dx"><strong>AX·DX</strong><span>업무 전환 / 프로세스</span></div>
+                    <div class="node consulting"><strong>Consulting</strong><span>실행 중심 자문</span></div>
+                    <div class="node education"><strong>Lecture</strong><span>창업지원사업 제안서</span></div>
+                </div>
             </div>
-        </div>
-    </section> -->
+        </section>
 
+        <!-- ── Services ── -->
+        <section id="services">
+            <div class="container">
+                <div class="section-head">
+                    <div class="section-label">What We Do</div>
+                    <h2>비즈니스 성공을 위한 전략과 기술을 함께 봅니다</h2>
+                    <p class="section-desc">아이디어, 데이터, 업무 프로세스, AI 도입 과제를 분리해서 보지 않고 실제 실행 흐름에 맞게 설계합니다. 문제 정의부터 시스템 구현, 운영 적용까지 한 번에 연결합니다.</p>
+                </div>
+                <div class="cards">
+                    <article class="card">
+                        <div class="icon">↗</div>
+                        <h3>경영컨설팅</h3>
+                        <p>사업 모델, 수익 구조, 시장 진입 전략, 운영 프로세스를 점검하고 실행 가능한 개선 방향을 제안합니다. 데이터 기반의 의사결정 체계를 함께 구축합니다.</p>
+                        <div class="card-detail">
+                            <span class="tag">사업모델 설계</span>
+                            <span class="tag">수익구조 진단</span>
+                            <span class="tag">시장 진입 전략</span>
+                        </div>
+                    </article>
+                    <article class="card">
+                        <div class="icon">✦</div>
+                        <h3>AI 기반 개발</h3>
+                        <p>반복 업무 자동화, 데이터 수집·분석, 문서 요약, 리포트 생성 등 실무에 바로 적용 가능한 AI 시스템을 설계하고 개발합니다.</p>
+                        <div class="card-detail">
+                            <span class="tag">업무 자동화</span>
+                            <span class="tag">데이터 파이프라인</span>
+                            <span class="tag">AI 리포팅</span>
+                        </div>
+                    </article>
+                    <article class="card">
+                        <div class="icon">◎</div>
+                        <h3>AX·DX 컨설팅</h3>
+                        <p>조직의 업무 흐름을 분석하고 AI와 디지털 도구를 활용해 더 빠르고 효율적인 업무 방식으로 전환합니다. 도구 도입에 그치지 않고 일하는 방식을 다시 설계합니다.</p>
+                        <div class="card-detail">
+                            <span class="tag">DX 로드맵</span>
+                            <span class="tag">프로세스 혁신</span>
+                            <span class="tag">조직 전환 설계</span>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── AI / DX ── -->
+        <section id="ai-dx" class="dark-section">
+            <div class="container capability-grid">
+                <div class="feature-panel">
+                    <div class="section-label">AI / AX·DX Consulting</div>
+                    <h2>AI 도입을 실험이 아니라 업무 성과로 연결합니다</h2>
+                    <p class="section-desc">문제 정의부터 데이터 구조화, 자동화 설계, 운영 적용까지 한 번에 연결합니다. 현장에서 실제로 작동하는 시스템을 만드는 것이 목표입니다.</p>
+                    <ul>
+                        <li>내부 문서 요약 / 검색 시스템 구축</li>
+                        <li>공공 데이터, 시장 정보, 산업 공고 수집·분류 자동화</li>
+                        <li>리포트 생성, 알림, 운영 대시보드 구축</li>
+                        <li>팀 업무 프로세스 진단 및 AX/DX 전환 로드맵 설계</li>
+                        <li>LLM 기반 내부 챗봇 및 지식 관리 시스템</li>
+                    </ul>
+                </div>
+                <div class="usecases">
+                    <div class="usecase">
+                        <strong>업무 자동화</strong>
+                        <span>반복 확인·정리·보고 업무를 자동화해 실무 시간을 줄입니다.</span>
+                    </div>
+                    <div class="usecase">
+                        <strong>데이터 파이프라인</strong>
+                        <span>흩어진 데이터를 수집, 정제, 분류해 의사결정 가능한 형태로 만듭니다.</span>
+                    </div>
+                    <div class="usecase">
+                        <strong>AI 리포팅</strong>
+                        <span>문서, 공고, 시장 정보를 요약하고 핵심 변화만 빠르게 확인합니다.</span>
+                    </div>
+                    <div class="usecase">
+                        <strong>전환 전략</strong>
+                        <span>도구 도입에 그치지 않고 조직의 일하는 방식을 다시 설계합니다.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── Lecture ── -->
+        <section id="lecture" class="lecture">
+            <div class="container lecture-wrap">
+                <aside class="lecture-highlight">
+                    <div class="section-label">Featured Program</div>
+                    <h2>예비창업패키지·초기창업패키지<br>제안서 작성법 실전 특강</h2>
+                    <p>
+                        좋은 아이템이 있어도 사업계획서가 심사자의 언어로 정리되지 않으면 선정 가능성이 낮아집니다.
+                        Polaris의 특강은 VC 심사역 출신 강사가 평가 관점에서 제안서의 구조, 설득 포인트, 보완 방향을 직접 짚어드립니다.
+                    </p>
+                    <div class="price">
+                        <strong>220,000원</strong>
+                        <span>2시간 실전 특강 · 강의 + 첨삭 + Q&amp;A</span>
+                    </div>
+                    <div class="section-actions">
+                        <button class="button primary disabled" type="button" disabled>이벤터스 신청 페이지 준비 중</button>
+                        <a class="button secondary" href="mailto:contact@polaris-a.com?subject=창업지원사업%20제안서%20특강%20문의">특강 문의하기</a>
+                    </div>
+                </aside>
+
+                <div class="lecture-list">
+                    <article class="lecture-card">
+                        <span class="lecture-meta">1부 · 60분</span>
+                        <h3>제안서 작성 전략 강의</h3>
+                        <p>예비창업패키지 / 초기창업패키지 평가 구조, 문제 정의, 고객·시장·수익모델 작성법, 기술성·사업성·실현가능성 설득 구조를 다룹니다.</p>
+                    </article>
+                    <article class="lecture-card">
+                        <span class="lecture-meta">2부 · 30분</span>
+                        <h3>대표 사업계획서 실시간 첨삭</h3>
+                        <p>신청자 중 1개 사업계획서를 선정해 문항별 개선 포인트를 제시하고, 심사 관점에서 보완해야 할 논리 구조를 설명합니다.</p>
+                    </article>
+                    <article class="lecture-card">
+                        <span class="lecture-meta">3부 · 30분</span>
+                        <h3>질의응답</h3>
+                        <p>개별 사업 아이템, 지원사업 선택 전략, 발표평가 준비 방향 등 실제 제출 과정에서 필요한 질문을 다룹니다.</p>
+                    </article>
+                    <article class="lecture-card">
+                        <h3>이런 분께 추천합니다</h3>
+                        <div class="target-grid">
+                            <div class="target-item">예비·초기창업패키지를 처음 준비하는 분</div>
+                            <div class="target-item">아이템은 있지만 제안서 구조화가 어려운 분</div>
+                            <div class="target-item">기술 설명보다 사업성 표현이 막히는 분</div>
+                            <div class="target-item">제출 전 심사자 관점 피드백이 필요한 분</div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── Instructors ── -->
+        <section class="instructor-section">
+            <div class="container">
+                <div class="section-head">
+                    <div class="section-label">Instructors</div>
+                    <h2>검증된 전문가가 직접 강의합니다</h2>
+                    <p class="section-desc">대표 직강 또는 VC 심사역 출신 전문가가 실제 심사 경험을 바탕으로 강의합니다. 이론이 아닌 현장에서 통하는 관점을 전달합니다.</p>
+                </div>
+                <div class="instructor-grid">
+                    <div class="instructor-card">
+                        <div class="instructor-avatar">🔍</div>
+                        <div class="instructor-info">
+                            <h4>현직 VC 심사역 및 창업컨설턴트</h4>
+                            <span class="instructor-role">벤처투자 심사역 · 창업지원사업 평가위원 다수</span>
+                            <p>벤처기업 투자를 담당하는 VC 심사역과 예비창업패키지·초기창업패키지 등의 창업지원사업을 평가하는 평가위원 다수가 강사로 참여, 실제 선정 기준과 탈락 사유를 바탕으로 제안서 작성의 핵심을 짚어드립니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── How We Work ── -->
+        <section>
+            <div class="container">
+                <div class="section-head">
+                    <div class="section-label">How We Work</div>
+                    <h2>문제 정의부터 실행 적용까지</h2>
+                    <p class="section-desc">컨설팅 문서에서 끝나지 않고 실제 업무와 시스템에 반영되는 방식을 지향합니다. 4단계 프로세스로 명확하게 진행합니다.</p>
+                </div>
+                <div class="process-grid">
+                    <div class="process-step">
+                        <span class="step-num">1</span>
+                        <h3>문제 정의</h3>
+                        <p>사업 목표, 병목, 의사결정 문제를 구체적인 과제로 정리합니다.</p>
+                    </div>
+                    <div class="process-step">
+                        <span class="step-num">2</span>
+                        <h3>구조화</h3>
+                        <p>데이터, 문서, 업무 흐름을 분석해 실행 가능한 설계로 바꿉니다.</p>
+                    </div>
+                    <div class="process-step">
+                        <span class="step-num">3</span>
+                        <h3>개발 / 적용</h3>
+                        <p>AI, 자동화, 운영 도구를 필요한 수준에 맞게 구현하고 적용합니다.</p>
+                    </div>
+                    <div class="process-step">
+                        <span class="step-num">4</span>
+                        <h3>개선 반복</h3>
+                        <p>현장 피드백과 결과를 바탕으로 프로세스와 시스템을 고도화합니다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── Contact ── -->
+        <section id="contact" class="contact">
+            <div class="container contact-box">
+                <div>
+                    <div class="section-label">Contact</div>
+                    <h2>사업, AI 도입, AX·DX 전환을 논의해보세요</h2>
+                    <p>컨설팅, AI 개발, AX·DX 전환, 창업지원사업 특강 문의는 아래 이메일로 연락 주세요. 담당자가 확인 후 빠르게 회신 드립니다.</p>
+                </div>
+                <div class="contact-email">
+                    <a class="button primary" href="mailto:contact@polaris-a.com?subject=Polaris%20Asia%20문의">contact@polaris-a.com</a>
+                    <small>평일 기준 24시간 이내 회신</small>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <footer>
-        &copy; Polaris Asia Company. All Rights Reserved.
+        <div class="container footer-inner">
+            <div>
+                <div class="footer-brand">폴라리스아시아(주) · Polaris Asia Company</div>
+                <div style="margin-top:4px;">경영컨설팅 · AI 기반 개발 · AX/DX 컨설팅</div>
+            </div>
+            <div>&copy; 2026 Polaris Asia Company. All Rights Reserved.</div>
+        </div>
     </footer>
-
 </body>
 </html>
