@@ -1,20 +1,8 @@
-# CLAUDE.md
+@AGENTS.md
 
-## Repo
-- Static Polaris website
-- Generated notice pages included
-
-## Focus
-- Read only the page or script being changed
-- Prefer section-level edits over whole-file reads
-- Keep HTML edits narrow
-
-## Entry points
-- Landing page: `index.html`
-- Notice pages: `investment_notices.html`, `work_notices.html`
-- Update script: `run_all.py`
-- Setup notes: `RASPBERRY_PI_SETUP.md`
-
-## Rules
-- Avoid whole-file HTML reformatting for small changes
-- Keep content edits and deployment edits separate
+<!--
+Claude Code reads CLAUDE.md, not AGENTS.md, so this file exists only to pull the
+real instructions in. AGENTS.md is the standard other coding agents already read
+(Taemin, 2026-08-05) — keeping one source means the rules cannot drift apart.
+Write instructions in AGENTS.md; add Claude-only notes below the import.
+-->
